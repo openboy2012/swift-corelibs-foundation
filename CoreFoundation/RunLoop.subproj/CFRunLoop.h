@@ -96,10 +96,10 @@ typedef struct {
     CFStringRef	(*copyDescription)(const void *info);
     Boolean	(*equal)(const void *info1, const void *info2);
     CFHashCode	(*hash)(const void *info);
-    void	(*schedule)(void *info, CFRunLoopRef rl, CFRunLoopMode mode);
-    void	(*cancel)(void *info, CFRunLoopRef rl, CFRunLoopMode mode);
+    void	(*schedule)(void *info, CFRunLoopRef rl, CFRunLoopMode mode); //定时处理，适用performSelector:withObject:afterDelay:
+    void	(*cancel)(void *info, CFRunLoopRef rl, CFRunLoopMode mode); //取消处理，适用cancelPreviousPerformRequestsWithTarget:selector:object:
     void	(*perform)(void *info);
-} CFRunLoopSourceContext;
+} CFRunLoopSourceContext; //iOS的performSelector系列方法会用这个Context存储函数指针，并且可以取消
 
 typedef struct {
     CFIndex	version;
